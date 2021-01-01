@@ -1,0 +1,81 @@
+.body{
+  overflow: auto;
+}
+.title_wrapper{
+  background-image: url("../img/title_background_blur.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: -5%;
+  margin-left: -1%;
+  margin-right: -0.5%;
+}
+}
+.login_register{
+  float: right;
+}
+.Login{
+  margin-top: 5%;
+}
+.Login, .Register{
+  background-color: orange;
+  border-style: none;
+  padding: .5%;
+  margin-left: 90%;
+  color: white;
+  transition: .5s;
+  border-radius: 15px;
+  margin-bottom: 5px;
+}
+.Login:hover, .Register:hover{
+  opacity: .8;
+  transition: .5s;
+}
+.mod_email{
+  margin-left: 90%;
+  background-color: orange;
+  border-style: none;
+  padding: .5%;
+  color: white;
+  border-radius: 15px;
+  transition: .5s;
+}
+.mod_email:hover{
+  opacity: .8;
+  transition: .5s;
+}
+.title{
+  color: #ff9900;
+  font-size: 700%;
+  padding-left: 20%;
+
+}
+.under_title{
+  color: white;
+  padding-bottom: 10%;
+  margin-top: -5%;
+  padding-left: 46%;
+}
+.form_wrapper{
+  margin-top:-5%;
+  background-color: #ff9900;
+  margin-left: -2%;
+  margin-right: -0.5%;
+}
+.profil{
+}
+.salut{
+  margin-top: -8%;
+  padding-left: 20%;
+  color:white;
+  font-size: 50px;
+}
+.img_div{
+padding-left: 50%;
+}
+.pfp{
+  border-style: solid;
+  width: 250px;
+  height: 250px;
+  border-color: white;
+  border-radius: 250px;
+}
