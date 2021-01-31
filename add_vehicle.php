@@ -1,3 +1,14 @@
+<?php
+// Initialize the session
+session_start();
+
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login.php");
+    exit;
+}
+?>
+
 <html>
 <head></head>
 
@@ -15,8 +26,8 @@
     <h2 class="under_title">- The best auction site to sell your motor vehicle</h2>
   </div>
   <div class="form_wrapper">
-    <form method="POST" action="formular.php" class="form" enctype="multipart/form-data">
-        <b><select class="cars" name="make" id="select1">
+    <form method="POST" action="ad.php" class="form" enctype="multipart/form-data">
+        <b>Make:<select class="cars" name="make" id="select1">
           <option class="make" selected="selected">Select Make</option>
           <option class="make" value="abarth">Abarth</option>
           <option class="make" value="acura">Acura</option>
@@ -77,7 +88,8 @@
           <option class="make" value="volkswagen">Volkswagen</option>
           <option class="make" value="volvo">Volvo</option>
         </select>
-        <select id="select2">
+        <select id="select2" name="model">
+          <option class="make" selected="selected">Select Model</option>
         <script>
                       var abarth_models=["124 Spider","500","500C","595","595C","595 Competizione","595 Turismo","695","695C","Grande Punto","Punto Evo","Others"];
                       var acura_models=["MDX","NSX","RL","RSX","TL","TSX","Others"];
@@ -96,7 +108,7 @@
                       var chrysler_models=["200","300C","300 M","Aspen","Crossfire","Daytona","ES","Grand Voyager","GS","GTS","Imperial","Le Baron","Neon","New Yorker","Pacifica","PT Cruiser","Saratoga","Sebring","Stratus","Valiant","Viper","Vision","Voyager","Others"];
                       var citroen_models=["2 CV","AX","Berlingo","BX","C1","C2","C3","C3 Aircross","C3 Picasso","C4","C4 Aircross","C4 Cactus","C4 Picasso","C4 SpaceTourer","C5","C5 Aircros","C6","C8","C-Crosser","C-Elysée","CX","C-Zero","DS","DS3","DS4","DS4 Crossback","DS5","E-MEHARI","Evasion","Grand C4 Picasso","GSA","Jumper","Jumpy","Nemo","SAXO","SM","SpaceTourer","Visa","Xantia","XM","Xsara","Xsara Picasso","ZX","Others"];
                       var corvette_models=["C1","C2","C3","C4","C5","C6","C7","C8","Z06","ZR 1","Others"];
-                      var dodge_models=["Avenger","Caliber","Chalenger","Charger","Dakota","Dart","Demon","Durango","Grand Caravan","Hornet","Journey","Magnum","Neon","Nitro","Stealth","Viper","Others"];
+                      var dodge_models=["Avenger","Caliber","Challenger","Charger","Dakota","Dart","Demon","Durango","Grand Caravan","Hornet","Journey","Magnum","Neon","Nitro","Stealth","Viper","Others"];
                       var ferrari_models=["208","246","250","275","288","308","328","330","348","360","365","400","412","456","458","488","488 GTB","488 Pista","488 Spider","512","550","570","599 GTB","599 GTO",
                       "599 SA Aperta","612","750","812","California","Daytona","Dino GT4","Enzo Ferrari","F12","F355","F40","F430","F50","F8","FF","GTC4Lusso","LaFerrari","Mondial","Portofino","Superamerica","Testarossa","Others"];
                       var fiat_models=["124","124 Spider","126","127","130","131","500","500C","500L","500L Cross","500L Living","500L Trekking","500L Urban","500L Wagon","500S","500X","Albea","Barchetta","Brava","Bravo","Cinquecento","Coupe","Croma","Dino",
@@ -138,9 +150,9 @@
                       var suzuki_models=["Alto","Baleno","Cappuccino","Carry","Celerio","Grand Vitara","Ignis","iK-2","Jimny","Kizashi","Liana","LJ","SJ Samurai","Splash","Super-Carry","Swift","SX4","SX4 S-Cross","Vitara","Wagon R+","X-90","Others"];
                       var tesla_models=["Model S","Model 3","Model X","Model Y","Roadster","Cybertruck","Others"];
                       var toyota_models=["4-Runner","Alphard","Auris","Auris Touring Sports","Avalon","Avensis","Avensis Verso","Aygo","Camry","Carina","Celica","C-HR","Corolla","Corolla Verso","Cressida","Crown","Dyna","FCV","FJ","Fortrunner","GT86","Hiace","Highlander","Hilux","IQ","Land Cruiser","Lite-Ace","Matrix","Mirai","MR 2","Paseo","Picnic","Previa","Prius","Prius+","Proace","Proace City","Rav 4"," Sequoia","Sienna","Starlet","Supra","Tacoma","Tercel","Tundra","Urban Cruiser","Verso","Verso-S","Yaris","Others"];
-                      var volkswagen_models=["181","Amarok","Arteon","Beetle","Bora","Buggy","Caddy","CC","Corrado","Crafter","Eos","Fox","Golf","ID.3","ID.4","Iltis","Jetta","Karmann Ghia","LT","Lupo","New Beetle","Passat","Phaeton","Polo","Routan","Santana","Scirocco","Sharan","T1","T2","T3","T4",T5,"T6","Taro","T-Cross","Tiguan","Tigual Allspace","Touareg","Touran","T-Roc","up!","Vento","XL1","Others"];
+                      var volkswagen_models=["181","Amarok","Arteon","Beetle","Bora","Buggy","Caddy","CC","Corrado","Crafter","Eos","Fox","Golf","ID.3","ID.4","Iltis","Jetta","Karmann Ghia","LT","Lupo","New Beetle","Passat","Phaeton","Polo","Routan","Santana","Scirocco","Sharan","T1","T2","T3","T4","T5","T6","Taro","T-Cross","Tiguan","Tigual Allspace","Touareg","Touran","T-Roc","up!","Vento","XL1","Others"];
                       var volvo_models=["240","244","245","262","264","340","360","440","460","480","740","744","745","760","780","850","855","940","945","960","965","Amazon","C30","C70","Polar","S40","S60","S60 Cross Country","S70","S80","S90","V40","V40 Cross Country","V50","V60","V60 Cross Country","V70","V90","V90 Cross Country","XC40","XC60","XC70","XC90","Others"];
-                      
+
 
 
                       $("#select1").on("change", function() {
@@ -268,6 +280,384 @@
                                     $('#select2').append(option);
                                   }
                                 }
+                                else {
+                                  if($(this).val() === "ferrari") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= ferrari_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+ferrari_models[i]+'">'+ferrari_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "fiat") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= fiat_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+fiat_models[i]+'">'+fiat_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "ford") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= ford_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+ford_models[i]+'">'+ford_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "gmc") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= gmc_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+gmc_models[i]+'">'+gmc_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "honda") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= honda_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+honda_models[i]+'">'+honda_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "hummer") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= hummer_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+hummer_models[i]+'">'+hummer_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "hyundai") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= hyundai_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+hyundai_models[i]+'">'+hyundai_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "infiniti") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= infiniti_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+infiniti_models[i]+'">'+infiniti_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "jeep") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= jeep_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+jeep_models[i]+'">'+jeep_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "jaguar") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= jaguar_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+jaguar_models[i]+'">'+jaguar_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "kia") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= kia_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+kia_models[i]+'">'+kia_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "koenigsegg") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= koenigsegg_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+koenigsegg_models[i]+'">'+koenigsegg_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "lamborghini") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= lamborghini_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+lamborghini_models[i]+'">'+lamborghini_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "lancia") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= lancia_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+lancia_models[i]+'">'+lancia_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "land_rover") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= land_rover_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+land_rover_models[i]+'">'+land_rover_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "lexus") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= lexus_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+lexus_models[i]+'">'+lexus_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "lincoln") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= lincoln_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+lincoln_models[i]+'">'+lincoln_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "lotus") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= lotus_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+lotus_models[i]+'">'+lotus_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "maserati") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= maserati_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+maserati_models[i]+'">'+maserati_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "maybach") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= maybach_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+maybach_models[i]+'">'+maybach_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "mazda") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= mazda_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+mazda_models[i]+'">'+mazda_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "mclaren") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= mclaren_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+mclaren_models[i]+'">'+mclaren_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "mercedes") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= mercedes_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+mercedes_models[i]+'">'+mercedes_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "mini") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= mini_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+mini_models[i]+'">'+mini_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "mitsubishi") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= mitsubishi_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+mitsubishi_models[i]+'">'+mitsubishi_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "nissan") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= nissan_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+nissan_models[i]+'">'+nissan_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "opel") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= opel_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+opel_models[i]+'">'+opel_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "pagani") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= pagani_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+pagani_models[i]+'">'+pagani_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "peugeot") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= peugeot_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+peugeot_models[i]+'">'+peugeot_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "pontiac") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= pontiac_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+pontiac_models[i]+'">'+pontiac_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "porsche") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= porsche_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+porsche_models[i]+'">'+porsche_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "ram") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= ram_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+ram_models[i]+'">'+ram_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "renault") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= mitsubishi_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+renault_models[i]+'">'+renault_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "rolls") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= rolls_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+rolls_models[i]+'">'+rolls_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "skoda") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= skoda_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+skoda_models[i]+'">'+skoda_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "smart") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= smart_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+smart_models[i]+'">'+smart_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "subaru") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= subaru_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+subaru_models[i]+'">'+subaru_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "suzuki") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= suzuki_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+suzuki_models[i]+'">'+suzuki_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "tesla") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= tesla_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+tesla_models[i]+'">'+tesla_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "toyota") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= toyota_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+toyota_models[i]+'">'+toyota_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "volkswagen") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= volkswagen_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+volkswagen_models[i]+'">'+volkswagen_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                else {
+                                  if($(this).val() === "volvo") {
+                                  $("#select2").find("option").remove().end().append('<option class="model" selected="selected" value="">Select Model</option>');
+                                  for(i=0; i <= volvo_models.length -1; i++){
+                                    var option = '<option class="model"  value="'+volvo_models[i]+'">'+volvo_models[i]+'</option>';
+                                    $('#select2').append(option);
+                                  }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
                                 }
                                 }
                             }
@@ -286,6 +676,31 @@
                       })
           </script>
         </select>
+        <br>
+          Year:<input type="text" placeholder="2017" name='year'><br>
+          Mileage:<input type="text" placeholder="27000 Miles" name='mileage'> miles<br>
+          Fuel type:<select id="select3" name='fuel'>
+            <option>Gas</option>
+            <option>Diesel</option>
+            <option>Electric</option>
+            <option>LPG</option>
+          </select><br>
+        Displacement:<input type="text" placeholder="7200" name='displacement'> ci<br>
+        Power<input type="text" placeholder="320" name='power'> hp<br>
+        Transmission type<select id="select4" name='transmission'>
+          <option class="make" selected="selected">Select Transmission</option>
+          <option>Manual</option>
+          <option>Automatic</option>
+        </select><br>
+        Color:<input type="text" placeholder="Black" name='color'><br>
+        VIN:<input type="text" placeholder="1234567890" name='vin'><br>
+        Describe your vehicle:<br><textarea rows="7" cols="50" name='description'></textarea><br>
+        Country:<input type="text" placeholder="United States" name='country'><br>
+        State:<input type="text" placeholder="California" name='state'><br>
+        City:<input type="text" placeholder="San Francisco" name='city'><br>
+        Date of the auction:<input type="date" name='date'><br>
+        Reserve:<input type="text" placeholder="0" name='reserve' value='0'> $<br>(if you wish to have no reserve leave it as 0)<br>
+        Photos:<input multiple type="file" name='veh_photos'><br>
         </b>
       <button type="submit" class="button_register"><b>Submit</b></button></b>
     </form>

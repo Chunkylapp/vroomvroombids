@@ -70,9 +70,11 @@ if($ok==1){
             echo("<b>Acest nume de utilizator deja exista<b>");
           }
           else{
-            $target="profile_pics/".basename($_FILES['pfp']['name']);
+            $temp = explode(".", $_FILES["pfp"]["name"]);
+            $newfilename = $username . '.' . end($temp);
+            $target="profile_pics/".$newfilename;
             $image=$_FILES['pfp']['name'];
-            $querry="INSERT INTO users (nume,prenume,email,data_nastere,username,parola,profile_pic) VALUES ('$nume','$prenume','$email','$data_nastere','$username','$parola_1','$image')";
+            $querry="INSERT INTO users (nume,prenume,email,data_nastere,username,parola,profile_pic) VALUES ('$nume','$prenume','$email','$data_nastere','$username','$parola_1','$newfilename')";
             if(!mysqli_query($connect,$querry)) die(mysqli_error());
             else{
               if(move_uploaded_file($_FILES['pfp']['tmp_name'],$target)){

@@ -1,3 +1,13 @@
+<?php
+// Initialize the session
+session_start();
+
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login.php");
+    exit;
+}
+?>
 <html>
 <head></head>
 
@@ -29,9 +39,6 @@
     <?php
       include "connection.php";
 
-      session_start();
-      // get current logged in user
-
       foreach($_SESSION as $result){
 
       }
@@ -45,7 +52,7 @@
         echo"</div>";
           echo ("<div class='salut'><b>Salut, ".$row['prenume']."!</b></div>");
           echo("<br>");
-          
+
           echo("<br>");
       echo"</div>";
       ?>
