@@ -1,4 +1,6 @@
 <?php
+include "connection.php";
+
 // Initialize the session
 session_start();
 
@@ -7,6 +9,33 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
+
+foreach($_SESSION as $result){
+
+}
+
+$query="SELECT * FROM users WHERE email= '$result'";
+$email=$connect->query($query);
+$row=mysqli_fetch_assoc($email);
+
+$uid=$row['id'];
+
+$time1 = new DateTime("now");
+$que = "SELECT * FROM vehicles WHERE bid_id='$uid'";
+$result=mysqli_query($connect,$que);
+$ok=0;
+while($ree=mysqli_fetch_assoc($result)){
+  $future_date= new DateTime($ree['ending_time']);
+  if($time1>$future_date){
+    $ok=1;
+    break;
+  }
+}
+if($ok==1){
+  echo("<script>alert('You won some auctions! Visit your profile to get in contact with the seller!')</script>");
+  echo("<script>window.location = 'profile.php';</script>");
+}
+
 ?>
 <html>
 <head>
@@ -19,6 +48,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <body class="body">
   <div class="title_wrapper">
     <div class="login_register">
+      <form action="welcome.php">
+        <button class="Login" type="submit"><b>Home</b></button>
+      </form>
       <form action="logout.php">
         <button class="Login" type="submit"><b>Logout</b></button>
       </form>

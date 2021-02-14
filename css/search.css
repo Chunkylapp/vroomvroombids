@@ -1,0 +1,200 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.body{
+  overflow: auto;
+}
+.title_wrapper{
+  background-image: url("../img/title_background_blur.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  /*width: 100%;*/
+}
+.login_register{
+  padding:2% 2% 0 0;
+  float: right;
+}
+.Login, .Register{
+  background-color: orange;
+  border-style: none;
+  padding: 10%;
+  color: white;
+  transition: .5s;
+  border-radius: 15px;
+  margin-bottom: 5px;
+}
+.Login:hover, .Register:hover{
+  opacity: .8;
+  transition: .5s;
+}
+.profile{
+  background-color: orange;
+  border-style: none;
+  padding: 5%;
+  color: white;
+  border-radius: 15px;
+  transition: .5s;
+}
+.profile:hover{
+  opacity: .8;
+  transition: .5s;
+}
+.title{
+  color: #ff9900;
+  font-size: 6vw;
+  padding-left: 20%;
+  padding-top: 6%;
+}
+.under_title{
+  color: white;
+  padding-bottom: 10%;
+  padding-left: 46%;
+}
+
+.search_wrapper{
+  height: 151px;
+  width: 100%;
+  background-color: #ff9900;
+  overflow: auto;
+}
+
+.search_form{
+  text-align: center;
+  position: relative;
+  height: 150px;
+  display: table-cell;
+  width:100vw;
+  vertical-align: middle;
+  font-size: 1.4em;
+}
+
+.search_form form{
+  display: inline-flex;
+  margin:auto;
+}
+
+.search_text_area{
+  padding-left: 5%;
+  width: 300px;
+  border-style: solid;
+  border-color: white;
+  border-radius: 25px;
+  font-size: 0.9em;
+}
+
+.search_button_wrapper{
+  background-color: white;
+  border-color: white;
+  border-style: solid;
+  border-radius: 25px;
+  float:left;
+}
+
+
+.search_button{
+  background-color: white;
+  height: 4vw;
+  transition: 0.5s;
+  border-radius: 25px;
+  border-style: solid;
+  border-color: white;
+
+}
+
+.search_button:hover{
+opacity: 0.7;
+transition: 0.5s;
+}
+.white_line{
+  background-color: white;
+  height: 15px;
+  width: auto;
+}
+.pic{
+  height: 300px;
+  width:425px;
+  float: left;
+}
+.car_info{
+  color: white;
+}
+.data_table{
+  margin-top: -2%;
+  padding-left: 27.5%;
+}
+.bid_form{
+  margin-left: 70%;
+  font-size: 25px;
+}
+.m_m_y{
+  color: white;
+  padding-left: 27.5%;
+  font-size: 25px;
+}
+.clearfix{
+    clear:both
+}
+.bid_button{
+  font-size: 25px;
+  background-color: white;
+  color: #ff9900;
+  border-style: solid;
+  border-radius: 10px;
+  border-color: white;
+}
+.bid_text{
+  font-size:25px;
+  background-color:white;
+  color:#ff9900;
+  border-style:solid;
+  border-radius:25px;
+  padding-left: 5px;
+  border-color:white;
+}
+.ad{
+  padding-top: 2%;
+  background-color: #ff9900;
+}
+/* Slideshow container */
+.slideshow-container {
+  max-width: 300px;
+  position: relative;
+}
+
+
+/* Next & previous buttons */
+.prev {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+.next{
+  margin-left: 119.5%;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}

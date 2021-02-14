@@ -110,21 +110,55 @@ if($ok){
                 $email=$connect->query($query);
                 $row=mysqli_fetch_assoc($email);
                 $user_id=$row['id'];
-                echo($user_id);
-                $query="INSERT INTO vehicles (user_id,make,model,year,mileage,fuel_type,cubic_inches,transmission,horsepower,bid_price,reserve,bid_id,ending_time,color,vin,location_country,location_city,location_state,description) VALUES ($user_id,$make,$model,$year,$mileage,$fuel,$displacement,$transmission,$power,$bid_price,$reserve,$user_id,$date,$color,$vin,$country,$city,$state,$description)";
-                $stmt = $mysqli->prepare($query);
-                $stmt->execute();
-                if($stmt->affected_rows === 0) exit('No rows updated');
-                $stmt->close();
-                echo($query);
-                if(!mysqli_execute(mysqli_prepare($connect,$query)))
+                $query="INSERT INTO vehicles (user_id,make,model,year,mileage,fuel_type,cubic_inches,transmission,horsepower,bid_price,reserve,bid_id,ending_time,color,vin,location_country,location_city,location_state,description) VALUES ('$user_id','$make','$model','$year','$mileage','$fuel','$displacement','$transmission','$power','$bid_price','$reserve','$user_id','$date','$color','$vin','$country','$city','$state','$description')";
+                if(!mysqli_query($connect,$query))
                 {
                   die(mysqli_error($connect));
                 }
                 else{
-                    $query="SELECT * FROM vehicles WHERE trim(vin)=trim('$vin')";
-                     $result=mysqli_query($connect,$query);
-                     echo($result['vin']);
+                  $query="SELECT * FROM vehicles WHERE vin='$vin'";
+                  $result=mysqli_query($connect,$query);
+                  if($result){
+                    $rowSQL = "SELECT MAX( id ) AS max FROM vehicles";
+                    $ree=mysqli_query($connect,$rowSQL);
+                    $row = mysqli_fetch_array($ree);
+                    $picture_id=$row['max'];
+                    if (isset($_POST['add_vehicle'])) {
+                              $uploadFolder = 'ad_pictures/';
+                              $i=0;
+                              foreach ($_FILES['veh_photos']['tmp_name'] as $key => $image) {
+                                    $imageTmpName = $_FILES['veh_photos']['tmp_name'][$key];
+                                    $imageName = $_FILES['veh_photos']['name'][$key];
+                                    $final_image_name=$picture_id.'_'.$i.'_'.$imageName;
+                                    $result = move_uploaded_file($imageTmpName,$uploadFolder.$final_image_name);
+                                    if($i==0)
+                                      $query = "INSERT INTO vehicle_pics (ad_id,is_first,pic) VALUES ('$picture_id',1,'$final_image_name')";
+                                    else
+                                      $query = "INSERT INTO vehicle_pics (ad_id,is_first,pic) VALUES ('$picture_id',0,'$final_image_name')";
+                                    $run = $connect->query($query) or die("Error in saving image".$connect->error);
+                                    $i=$i+1;
+                              }
+                              if ($result) {
+                                echo("<script>alert('The ad has been succesfully added to our database!')</script>");
+                                echo("<script>window.location = 'welcome.php';</script>");
+                              }
+                              else{
+                                $query="DELETE FROM vehicles WHERE id = '$picture_id'";
+                                if(!mysqli_query($connect,$query))
+                                {
+                                  die(mysqli_error($connect));
+                                }
+                                else{
+                                echo("<script>alert('There was an error! Go back and try again.If the problem persists contact the owner of the website.')</script>");
+                                echo("<script>window.location = 'add_vehicle.php';</script>");
+                                }
+                              }
+                    }
+                  }
+                  else{
+                  //  echo("<script>alert('There was an error! Go back and try again.<br>If the problem persists contact the owner of the website.')</script>");
+                    //echo("<script>window.location = 'add_vehicle.php';</script>");
+                  }
                 }
 
               }

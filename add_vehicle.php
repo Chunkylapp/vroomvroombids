@@ -700,9 +700,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         City:<input type="text" placeholder="San Francisco" name='city'><br>
         Date of the auction:<input type="date" name='date'><br>
         Reserve:<input type="text" placeholder="0" name='reserve' value='0'> $<br>(if you wish to have no reserve leave it as 0)<br>
-        Photos:<input multiple type="file" name='veh_photos'><br>
+        Photos:<input multiple type="file" name='veh_photos[]'><br>
         </b>
-      <button type="submit" class="button_register"><b>Submit</b></button></b>
+      <button type="submit" class="button_register" name="add_vehicle"><b>Submit</b></button></b>
     </form>
   </div>
 </html>

@@ -79,6 +79,10 @@ if($ok==1){
             else{
               if(move_uploaded_file($_FILES['pfp']['tmp_name'],$target)){
                 $_SESSION['submited']="Datele au fost introduse";
+                /*$subject="Vroom Vroom Bids registration";
+                $message="Thank you for registering! Your account has been activated and you can start bidding!";
+                $headers = 'From: vroomvroom@bids.com' . "\r\n" .'Reply-To: tccz658@gmail.com' . "\r\n" .'X-Mailer: PHP/' . phpversion();
+                mail($email,$subject,$message,$headers);*/
                 echo("<script>alert('Ati fost inregistrat cu succes!')</script>");
                 echo("<script>window.location = 'login.php';</script>");
               }

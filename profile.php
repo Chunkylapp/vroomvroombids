@@ -50,7 +50,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         echo("<div class='img_div'>");
           echo"<img class='pfp'src='profile_pics/" .$row['profile_pic']."'>";
         echo"</div>";
-          echo ("<div class='salut'><b>Salut, ".$row['prenume']."!</b></div>");
+          echo ("<div class='salut'><b>Hi, ".$row['prenume']."!</b></div>");
           echo("<br>");
 
           echo("<br>");
