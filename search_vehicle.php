@@ -144,7 +144,7 @@ $text=$_POST['search_string'];
                       $r=mysqli_fetch_assoc($e);
                       echo("<br>");
                       echo("<div class='ad'>");
-                      echo("<img src='ad_pictures/".$r['pic']."' class='pic'>");
+                      echo("<a href='car_ad.php?car_id=$iddd'><img src='ad_pictures/".$r['pic']."' class='pic'></a>");
                       echo("<div class='car_info'>");
                       echo("<div class='m_m_y'><b>".$row['year'].' ');
                       echo(ucfirst($row['make'].' '));
@@ -170,6 +170,7 @@ $text=$_POST['search_string'];
                       echo($interval->format('%d days %H hours %i minutes'));
                       echo("</div>");
                       echo("<div class='clearfix'></div>");
+                      echo("<br>");echo("<br>");
                   }
                 }
           }

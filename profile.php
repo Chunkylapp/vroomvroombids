@@ -50,11 +50,15 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         echo("<div class='img_div'>");
           echo"<img class='pfp'src='profile_pics/" .$row['profile_pic']."'>";
         echo"</div>";
-          echo ("<div class='salut'><b>Hi, ".$row['prenume']."!</b></div>");
+          echo ("<div class='salut'><b>Hi, ".$row['nume']."!</b></div>");
           echo("<br>");
 
           echo("<br>");
       echo"</div>";
       ?>
+  </div>
+  <div class="but">
+    <button class="buton_my_bids" onclick="window.location.href='my_bids.php'"><b>My Bids</b></button>
+    <button class="buton_my_ads" onclick="window.location.href='my_ads.php'"><b>My Ads</b></button>
   </div>
 </html>

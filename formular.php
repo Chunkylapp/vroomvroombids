@@ -12,47 +12,59 @@ $parola_2=$_POST['parola_2'];
 
 $ok=1;
 
+$alert="";
+
 if(strlen($username)<6){
-  echo("<b>Numele de utilizator trebuie sa aiba minim 6 caractere.</b><br>");
+  echo("<script>alert('The username must be at least 6 characters long')</script>");
+  echo("<script>window.location = 'register.php';</script>");
   $ok=0;
 }
 
 if(strlen($parola_1)<8){
-  echo("<b>Parola trebuie sa aiba minim 8 caractere.</b><br>");
+  echo("<script>alert('The password must be at least 8 characters long')</script>");
+  echo("<script>window.location = 'register.php';</script>");
   $ok=0;
 }
 
 if(empty($nume)){
-  echo("<b>Introduceti numele.</b><br>");
+  echo("<script>alert('Please insert your surname')</script>");
+  echo("<script>window.location = 'register.php';</script>");
   $ok=0;
 }
 if(empty($prenume)){
-  echo("<b>Introduceti prenumele.</b><br>");
+  echo("<script>alert('Please insert your name')</script>");
+  echo("<script>window.location = 'register.php';</script>");
   $ok=0;
 }
 if(empty($email)){
-  echo("<b>Introduceti emailul.</b><br>");
+  echo("<script>alert('Please insert your email')</script>");
+  echo("<script>window.location = 'register.php';</script>");
   $ok=0;
 }
 if(empty($data_nastere)){
-  echo("<b>Introduceti data nasterii.</b><br>");
+  echo("<script>alert('Please insert your date of birth')</script>");
+  echo("<script>window.location = 'register.php';</script>");
   $ok=0;
 }
 if(empty($username)){
-  echo("<b>Introduceti numele de utilizator.</b><br>");
+  echo("<script>alert('Please insert your username')</script>");
+  echo("<script>window.location = 'register.php';</script>");
   $ok=0;
 }
 if(empty($parola_1)){
-  echo("</b>Introduceti parola.</b><br>");
+  echo("<script>alert('Please insert your password')</script>");
+  echo("<script>window.location = 'register.php';</script>");
   $ok=0;
 }
 
 if(strcmp($parola_1,$parola_2)!=0){
-    echo('<b>Parole diferite</b><br>');
+  echo("<script>alert('The passwrods you enter don't match')</script>");
+  echo("<script>window.location = 'register.php';</script>");
     $ok=0;
 }
 if(empty($_FILES["pfp"]["name"])){
-  echo('<b>Selectati o imagine de profil</br></b>');
+  echo("<script>alert('Please insert a profile picture')</script>");
+  echo("<script>window.location = 'register.php';</script>");
   $ok=0;
 }
 if($ok==1){
@@ -60,14 +72,16 @@ if($ok==1){
   $result=mysqli_query($connect,$query);
   if($result){
     if($row=mysqli_fetch_assoc($result)){
-        echo("<b>Acest email deja exista<b>");
+      echo("<script>alert('The email is already registered!')</script>");
+      echo("<script>window.location = 'register.php';</script>");
       }
       else{
         $query="SELECT * FROM users WHERE trim(username)=trim('$username')";
         $result=mysqli_query($connect,$query);
         if($result){
           if($row=mysqli_fetch_assoc($result)){
-            echo("<b>Acest nume de utilizator deja exista<b>");
+            echo("<script>alert('The username is already taken!')</script>");
+            echo("<script>window.location = 'register.php';</script>");
           }
           else{
             $temp = explode(".", $_FILES["pfp"]["name"]);
@@ -78,16 +92,16 @@ if($ok==1){
             if(!mysqli_query($connect,$querry)) die(mysqli_error());
             else{
               if(move_uploaded_file($_FILES['pfp']['tmp_name'],$target)){
-                $_SESSION['submited']="Datele au fost introduse";
+                $_SESSION['submited']="Data submitted";
                 /*$subject="Vroom Vroom Bids registration";
                 $message="Thank you for registering! Your account has been activated and you can start bidding!";
                 $headers = 'From: vroomvroom@bids.com' . "\r\n" .'Reply-To: tccz658@gmail.com' . "\r\n" .'X-Mailer: PHP/' . phpversion();
                 mail($email,$subject,$message,$headers);*/
-                echo("<script>alert('Ati fost inregistrat cu succes!')</script>");
+                echo("<script>alert('You have successfully registered!')</script>");
                 echo("<script>window.location = 'login.php';</script>");
               }
               else{
-                echo "<b>A avut loc o eroare</b><br>";
+                echo "<b>There was an erorr</b><br>";
               }
             }
           }
@@ -96,6 +110,7 @@ if($ok==1){
 }
 }
 else{
-  echo("<b>Modificati si retrimiteti formularul de inregistrare.</b>");
+  echo("<script>alert('Something went wrong')</script>");
+  echo("<script>window.location = 'register.php';</script>");
 }
 ?>

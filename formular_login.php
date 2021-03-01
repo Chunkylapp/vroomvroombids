@@ -16,11 +16,13 @@ $ok=1;
 $token_login=0;
 
 if(empty($email)){
-  echo("<b>Introduceti emailul.</b><br>");
+  echo("<script>alert('Please insert the email!')</script>");
+  echo("<script>window.location = 'login.php';</script>");
   $ok=0;
 }
 if(empty($parola)){
-  echo("</b>Introduceti parola.</b><br>");
+  echo("<script>alert('Please insert the password!')</script>");
+  echo("<script>window.location = 'login.php';</script>");
   $ok=0;
 }
 if($ok==1){
@@ -35,11 +37,12 @@ if($ok==1){
       $_SESSION["loggedin"] = true;
       $_SESSION["id"] = $id_user;
       $_SESSION["email"] = $email;
-      echo("<script>alert('Ati fost logat cu succes!')</script>");
+      echo("<script>alert('You have successfully logged in!')</script>");
       echo("<script>window.location = 'welcome.php';</script>");
     }
     else{
-      echo("<b>Numele si utilizatorul sunt gresite</b>");
+      echo("<script>alert('The data you inserted is wrong, please try again!')</script>");
+      echo("<script>window.location = 'login.php';</script>");
     }
   }
 }

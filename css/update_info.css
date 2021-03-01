@@ -82,33 +82,44 @@
 
 .but{
   margin-top: 1%;
-  margin-left: -5%;
-  margin-right: -.5%;
+  margin-left: -2.5%;
+  margin-right: 2%;
   background-color: #ff9900;
-  padding-left:45%;
 }
-.buton_my_ads{
+.buton_left{
+  border-style: solid;
+  border-color: white;
+  border-radius: 15px;
+  background-color: white;
+  margin-top: 10%;
+  margin-left: 8%;
+  font-size: 25px;
+  margin-bottom: 10%;
+  color:#ff9900;
+  transition-duration: 0.5s;
+}
+.buton_inner{
   border-style: solid;
   border-color: white;
   border-radius: 15px;
   background-color: white;
   margin-top: 10%;
   margin-left: 5%;
-  font-size: 35px;
+  font-size: 25px;
   margin-bottom: 10%;
   color:#ff9900;
   transition-duration: 0.5s;
 }
-.buton_my_bids{
-  color:#ff9900;
+.buton_right{
   border-style: solid;
   border-color: white;
   border-radius: 15px;
   background-color: white;
-  font-size: 35px;
   margin-top: 10%;
-  margin-right: 5%;
+  margin-left: 5%;
+  font-size: 25px;
   margin-bottom: 10%;
+  color:#ff9900;
   transition-duration: 0.5s;
 }
 .buton_my_ads:hover{
