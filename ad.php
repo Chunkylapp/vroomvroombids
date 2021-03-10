@@ -149,15 +149,15 @@ if($ok){
                                   die(mysqli_error($connect));
                                 }
                                 else{
-                                echo("<script>alert('There was an error! Go back and try again.If the problem persists contact the owner of the website.')</script>");
-                                echo("<script>window.location = 'add_vehicle.php';</script>");
+                                  echo("<script>alert('There was an error! Go back and try again.If the problem persists contact the owner of the website.')</script>");
+                                  echo("<script>window.location = 'add_vehicle.php';</script>");
                                 }
                               }
                     }
                   }
                   else{
-                  //  echo("<script>alert('There was an error! Go back and try again.<br>If the problem persists contact the owner of the website.')</script>");
-                    //echo("<script>window.location = 'add_vehicle.php';</script>");
+                   echo("<script>alert('There was an error! Go back and try again.<br>If the problem persists contact the owner of the website.')</script>");
+                    echo("<script>window.location = 'add_vehicle.php';</script>");
                   }
                 }
 
